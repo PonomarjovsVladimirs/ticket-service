@@ -1,4 +1,4 @@
-Springboot application that returns ticket prices for a bus trip
+Springboot application that returns draft ticket prices for a bus trip
 
 0- Prerequisites
 ```
@@ -17,5 +17,6 @@ Started TicketApp in 1.764 seconds (JVM running for 2.051)
 ```
 4- Confirm that the application is running
 ```
-curl http://localhost:7070/tickets/Lithuania
+curl -X POST -H "Content-Type:application/json" -H "Accept:application/json" -d "[{\"bags\":[\"bag1\",\"bag2\"],\"category\":\"Adult\"}]" http://localhost:7070/tickets/Lithuania
+
 ```
