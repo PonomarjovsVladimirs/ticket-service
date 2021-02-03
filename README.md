@@ -1,4 +1,5 @@
-Springboot application that returns draft ticket prices for a bus trip
+Springboot application that returns draft ticket prices for a bus trip.
+This app is not a part of a real system. Underlying services are mocked.
 
 0- Prerequisites
 ```
