@@ -35,4 +35,5 @@ public class DataCollector {
     public BigDecimal getTotalPrice() {
         return totalPrice;
     }
+
 }

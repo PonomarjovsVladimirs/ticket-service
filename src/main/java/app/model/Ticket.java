@@ -1,10 +1,12 @@
 package app.model;
 
+import java.math.BigDecimal;
+
 public class Ticket {
     private final String category;
-    private final String price;
+    private final BigDecimal price;
 
-    public Ticket(String category, String price) {
+    public Ticket(String category, BigDecimal price) {
         this.category = category;
         this.price = price;
     }
@@ -13,7 +15,7 @@ public class Ticket {
         return category;
     }
 
-    public String getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 }

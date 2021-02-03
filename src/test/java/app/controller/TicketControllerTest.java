@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.model.TicketRequest;
 import app.service.TicketService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -24,12 +25,11 @@ public class TicketControllerTest {
     private TicketService ticketService;
 
     @Test
-    public void shouldReturnDeviceTreesNoInput() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.post("/tickets/destination")
-                .param("destination", "destination")
+    public void shouldReturnOk() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/tickets")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(new ObjectMapper().writeValueAsString(new ArrayList<>())))
+                .content(new ObjectMapper().writeValueAsString(new TicketRequest(new ArrayList<>(), "destination", "currency"))))
                 .andExpect(status().isOk());
     }
 }

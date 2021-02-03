@@ -1,6 +1,6 @@
 package app.service;
 
-import app.model.Passenger;
+import app.model.TicketRequest;
 import app.model.TicketResponse;
 import app.repository.BasePriceRepository;
 import app.repository.DataCollector;
@@ -27,15 +27,15 @@ public class TicketService {
     /**
      * returns ticket prices for each individual item and total price. Taxes included
      */
-    public TicketResponse getTickets(List<Passenger> passengers, String destination) {
-        return collectRates(destination)
-                .thenApply(v -> priceService.getPricedTickets(passengers, dataCollector))
+    public TicketResponse processTicketRequest(TicketRequest request) {
+        return collectRates(request.getDestination())
+                .thenApply(v -> priceService.priceTickets(request.getPassengers(), dataCollector, request.getCurrency()))
                 .join();
     }
 
     CompletableFuture<Void> collectRates(String destination) {
-        CompletableFuture<BigDecimal> adultBasePrice = basePriceRepository.getBasePrice(destination);
-        CompletableFuture<List<BigDecimal>> taxRates = taxRepository.getTaxRates();
+        CompletableFuture<BigDecimal> adultBasePrice = basePriceRepository.receiveBasePrice(destination);
+        CompletableFuture<List<BigDecimal>> taxRates = taxRepository.receiveTaxRates();
         adultBasePrice.whenComplete((result, ex) -> dataCollector.collectBasePrice(result));
         taxRates.whenComplete((result, ex) -> dataCollector.collectTaxRates(result));
         return CompletableFuture.allOf(adultBasePrice, taxRates);

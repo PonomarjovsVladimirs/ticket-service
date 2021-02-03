@@ -11,6 +11,7 @@ public class BigDecimalUtils {
     }
 
     public static BigDecimal multiplyRounded(BigDecimal multiplicand, BigDecimal multiplier) {
-        return (scaled(multiplicand.toString())).multiply(scaled(multiplier.toString()), new MathContext(3, RoundingMode.FLOOR));
+        return (scaled(multiplicand.toString()))
+                .multiply(scaled(multiplier.toString()), new MathContext(3, RoundingMode.FLOOR));
     }
 }

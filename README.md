@@ -1,4 +1,5 @@
-Springboot application that returns draft ticket prices for a bus trip
+Springboot application that returns draft ticket prices for a bus trip.
+This app is not a part of a real system. Underlying services are mocked.
 
 0- Prerequisites
 ```
@@ -17,6 +18,6 @@ Started TicketApp in 1.764 seconds (JVM running for 2.051)
 ```
 3- Run a request to confirm application is working
 ```
-curl -X POST -H "Content-Type:application/json" -H "Accept:application/json" -d "[{\"bags\":[\"bag1\",\"bag2\"],\"category\":\"Adult\"}]" http://localhost:7070/tickets/Lithuania
+curl -X POST -H "Content-Type:application/json" -H "Accept:application/json" -d "{\"currency\":\"EUR\",\"destination\":\"Lithuania\",\"passengers\":[{\"bags\":[\"bag1\",\"bag2\"],\"category\":\"Adult\"}]}" http://localhost:7070/tickets
 
 ```

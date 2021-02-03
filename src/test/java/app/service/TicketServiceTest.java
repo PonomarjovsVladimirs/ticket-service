@@ -1,5 +1,6 @@
 package app.service;
 
+import app.model.TicketRequest;
 import app.model.TicketResponse;
 import app.repository.BasePriceRepository;
 import app.repository.DataCollector;
@@ -12,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.concurrent.CompletableFuture;
 
 import static java.util.Arrays.*;
@@ -37,15 +37,15 @@ public class TicketServiceTest {
     public void shouldReturnTicketResponse() {
         TicketService spy = spy(ticketService);
         doReturn(CompletableFuture.allOf()).when(spy).collectRates("destination");
-        doReturn(new TicketResponse(new LinkedList<>(), "20.00")).when(priceService).getPricedTickets(new ArrayList<>(), dataCollector);
-        TicketResponse actualResult = spy.getTickets(new ArrayList<>(), "destination");
-        assertEquals("20.00", actualResult.getTotalPrice(), "price should be 20.00");
+        doReturn(new TicketResponse(new ArrayList<>(), new BigDecimal("20.00"), "currency")).when(priceService).priceTickets(new ArrayList<>(), dataCollector, "currency");
+        TicketResponse actualResult = spy.processTicketRequest(new TicketRequest(new ArrayList<>(), "destination", "currency"));
+        assertEquals(new BigDecimal("20.00"), actualResult.getTotalPrice(), "price should be 20.00");
     }
 
     @Test
     public void shouldCollectBasePriceAndTaxes() {
-        doReturn(CompletableFuture.completedFuture(new BigDecimal("10.00"))).when(basePriceRepository).getBasePrice("destination");
-        doReturn(CompletableFuture.completedFuture(asList(new BigDecimal("0.20")))).when(taxRepository).getTaxRates();
+        doReturn(CompletableFuture.completedFuture(new BigDecimal("10.00"))).when(basePriceRepository).receiveBasePrice("destination");
+        doReturn(CompletableFuture.completedFuture(asList(new BigDecimal("0.20")))).when(taxRepository).receiveTaxRates();
         ticketService.collectRates("destination");
         assertEquals(new BigDecimal("10.00"), dataCollector.getBasePrice(), "base price should be 10.00");
         assertEquals(asList(new BigDecimal("0.20")), dataCollector.getTaxRates(), "base price should be 10.00");

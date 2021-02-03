@@ -19,7 +19,7 @@ public class TaxRepositoryTest {
 
     @Test
     public void shouldReturnTaxes() throws ExecutionException, InterruptedException {
-        List<BigDecimal> actualResult = taxRepository.getTaxRates().get();
+        List<BigDecimal> actualResult = taxRepository.receiveTaxRates().get();
         assertEquals(asList(new BigDecimal("0.21")), actualResult, "should be single tax 0.21");
     }
 }

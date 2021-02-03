@@ -3,7 +3,7 @@ package app.model;
 import java.io.Serializable;
 import java.util.List;
 
-public class Passenger implements Serializable {
+public class Passenger {
     private final String category;
     private final List<String> bags;
 
