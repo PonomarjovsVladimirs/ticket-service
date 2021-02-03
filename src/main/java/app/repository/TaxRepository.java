@@ -10,7 +10,7 @@ import java.util.concurrent.CompletableFuture;
 @Component
 public class TaxRepository {
 
-    public CompletableFuture<List<BigDecimal>> getTaxRates() {
+    public CompletableFuture<List<BigDecimal>> receiveTaxRates() {
         return CompletableFuture.completedFuture(Arrays.asList(new BigDecimal("0.21")));
     }
 }

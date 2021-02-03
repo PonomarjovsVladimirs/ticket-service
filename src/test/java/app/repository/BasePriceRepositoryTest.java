@@ -17,7 +17,7 @@ public class BasePriceRepositoryTest {
 
     @Test
     public void shouldReturnBasePrice() throws ExecutionException, InterruptedException {
-        BigDecimal actualResult = basePriceRepository.getBasePrice("Lithuania").get();
+        BigDecimal actualResult = basePriceRepository.receiveBasePrice("Lithuania").get();
         assertEquals(new BigDecimal("10.00"), actualResult, "should be 10.00");
     }
 }

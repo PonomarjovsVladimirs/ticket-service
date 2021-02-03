@@ -8,7 +8,7 @@ import java.util.concurrent.CompletableFuture;
 @Component
 public class BasePriceRepository {
 
-    public CompletableFuture<BigDecimal> getBasePrice(String destination) {
+    public CompletableFuture<BigDecimal> receiveBasePrice(String destination) {
         return CompletableFuture.completedFuture(new BigDecimal("10.00"));
     }
 }
