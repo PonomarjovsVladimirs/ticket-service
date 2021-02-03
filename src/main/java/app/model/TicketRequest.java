@@ -9,7 +9,7 @@ public class TicketRequest implements Serializable {
     private final String currency;
     private final String destination;
 
-    public TicketRequest(List<Passenger> passengers, String destination, String currency){
+    public TicketRequest(List<Passenger> passengers, String destination, String currency) {
         this.passengers = passengers;
         this.destination = destination;
         this.currency = currency;
