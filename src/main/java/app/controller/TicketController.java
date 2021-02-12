@@ -15,7 +15,7 @@ public class TicketController {
     private TicketService ticketService;
 
     @PostMapping(value = "/tickets", consumes = "application/json", produces = "application/json")
-    public TicketResponse getTickets(@RequestBody TicketRequest request) {
+    public TicketResponse gatherTickets(@RequestBody TicketRequest request) {
         return ticketService.processTicketRequest(request);
     }
 }
